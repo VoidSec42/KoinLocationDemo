@@ -1,0 +1,150 @@
+package com.example.koindemo
+
+import android.R.attr.data
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.navigation.NavController
+import java.lang.invoke.MethodHandles.constant
+
+@Composable
+fun SunsetPage(viewModel: MainViewModel, navController: NavController) {
+
+    val sunsetResult = viewModel.sunsetResult.observeAsState()
+    val locationResult = viewModel.getLocation()
+    var inputLatitude by remember { mutableStateOf("") }
+    var inputLongitude by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(42.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(42.dp))
+
+        // Row for fetching the location
+        Row {
+            Button(
+                onClick = { viewModel.getLocation() }
+            ) {
+                Text(
+                    text = "Fetch Location"
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(42.dp))
+
+        // Row for showing the location
+        Row {
+            Text(text = "Location:")
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = locationResult.toString())
+        }
+        Spacer(modifier = Modifier.height(42.dp))
+
+        // Row for showing the input text field for sunset API parameters
+        Row {
+            OutlinedTextField(
+                value = inputLatitude,
+                onValueChange = { inputLatitude = it })
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Row {
+            OutlinedTextField(
+                value = inputLongitude,
+                onValueChange = { inputLongitude = it })
+        }
+
+        // Row for fetching Sunset API with added parameters
+        Spacer(modifier = Modifier.height(32.dp))
+        Row {
+            Button(
+                onClick = {
+                    viewModel.getSunsetData(
+                        longitude = inputLongitude,
+                        latitude = inputLatitude
+                    )
+                }
+            ) {
+                Text(
+                    text = "Fetch Sunrise Data"
+                )
+            }
+        }
+
+        // Handling the network answer and data for SunsetAPI
+        when (val result = sunsetResult.value) {
+            is NetworkResponse.Error -> {
+                Text(text = result.message)
+            }
+
+            NetworkResponse.Loading -> {
+                CircularProgressIndicator()
+            }
+
+            is NetworkResponse.Success -> {
+                SunsetDetails(data = result.data)
+            }
+
+            null -> {
+            }
+        }
+
+        // Row to open HamburgLocationPage
+        Spacer(modifier = Modifier.height(32.dp))
+        Row {
+            Button(onClick = { /*navController.navigate.*/
+
+            }) {
+                Text("Go to Page")
+
+            }
+        }
+    }
+}
+
+@Composable
+fun SunsetDetails(data: SunsetModel) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        Row {
+            Text(text = "Sunrise is at:")
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = data.results.sunrise)
+        }
+        Row {
+            Text(text = "Sunset is at:")
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = data.results.sunset)
+        }
+    }
+}
+
+
+
+
