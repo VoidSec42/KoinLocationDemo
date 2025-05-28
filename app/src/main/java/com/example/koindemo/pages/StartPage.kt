@@ -66,7 +66,7 @@ fun Buttons() {
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { /*navController.navigate.*/
+        Button(onClick = { navController.navigate(Screen.BerlinLocationScreen.route)
 
         }) {
             Text("Go to Berlin Page")
@@ -74,7 +74,7 @@ fun Buttons() {
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { /*navController.navigate.*/
+        Button(onClick = { navController.navigate(Screen.FrankfurtLocationScreen.route)
 
         }) {
             Text("Go to Frankfurt Page")
@@ -82,7 +82,7 @@ fun Buttons() {
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { /*navController.navigate.*/
+        Button(onClick = { navController.navigate(Screen.KielLocationScreen.route)
 
         }) {
             Text("Go to Kiel Page")

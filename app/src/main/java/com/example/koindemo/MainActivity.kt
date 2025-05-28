@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                             android.Manifest.permission.ACCESS_COARSE_LOCATION
                         ) == PackageManager.PERMISSION_GRANTED
                     ) {
-                        // Then open SunsetPage
+                        // Then open StartPage
                         Toast.makeText(this, "Permissions are granted", Toast.LENGTH_SHORT).show()
                         StartPage(viewModel, navController)
                     } else {
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             ),
                             requestCode
                         )
-                        // And open SunsetPage
+                        // And open StartPage
                         Toast.makeText(this, "Permissions are not granted", Toast.LENGTH_SHORT)
                             .show()
                         StartPage(viewModel, navController)
