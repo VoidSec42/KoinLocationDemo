@@ -1,9 +1,5 @@
 package com.example.koindemo
 
-package com.example.koindemo
-
-package com.example.koindemo
-
 import androidx.compose.runtime.LaunchedEffect
 import android.R.attr.data
 import android.util.Log
