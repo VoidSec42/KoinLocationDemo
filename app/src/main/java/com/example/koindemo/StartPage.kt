@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.koindemo.NetworkResponse
 
 @Composable
@@ -39,9 +40,7 @@ fun StartPage(viewModel: MainViewModel, navController: NavController) {
         // Row to open HamburgLocationPage
         Spacer(modifier = Modifier.height(64.dp))
         HeadlineAndText()
-
     }
-
 }
 
 @Composable
@@ -53,7 +52,6 @@ fun HeadlineAndText(
             fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
-
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
@@ -61,7 +59,6 @@ fun HeadlineAndText(
             text = "For now this page shows hardcoded buttons to some number of locations. When clicked the opened page should show sunset and sunrise data for this location. Later this will be changed to dynamic locations.",
             fontSize = 18.sp,
             textAlign = TextAlign.Center
-
         )
     }
     Spacer(modifier = Modifier.height(32.dp))
@@ -70,9 +67,9 @@ fun HeadlineAndText(
 
 @Composable
 fun Buttons() {
+    val navController = rememberNavController()
     Row {
-        Button(onClick = { /*navController.navigate.*/
-
+        Button(onClick = { navController.navigate(Screen.HamburgLocationScreen.route)
         }) {
             Text("Go to Hamburg Page")
         }
@@ -98,7 +95,7 @@ fun Buttons() {
         Button(onClick = { /*navController.navigate.*/
 
         }) {
-            Text("Go to Hannover Page")
+            Text("Go to Kiel Page")
         }
     }
 }
