@@ -1,6 +1,5 @@
-package com.example.koindemo
+package com.example.koindemo.pages
 
-import android.R.attr.data
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
@@ -24,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import java.lang.invoke.MethodHandles.constant
+import com.example.koindemo.MainViewModel
+import com.example.koindemo.api.NetworkResponse
+import com.example.koindemo.api.SunsetModel
 
 @Composable
 fun SunsetPage(viewModel: MainViewModel, navController: NavController) {

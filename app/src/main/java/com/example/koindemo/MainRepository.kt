@@ -1,31 +1,16 @@
 package com.example.koindemo
 
 import android.Manifest
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationProvider
-import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresPermission
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.koindemo.api.Api
+import com.example.koindemo.api.LocationModel
+import com.example.koindemo.api.SunsetModel
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.Task
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MainRepository(private val api: Api, private val context: Context) :

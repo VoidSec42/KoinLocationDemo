@@ -1,7 +1,7 @@
 package com.example.koindemo
 
-import android.content.Context
-import android.location.Location
+import com.example.koindemo.api.LocationModel
+import com.example.koindemo.api.SunsetModel
 import retrofit2.Response
 
 interface MainRepositoryInterface {

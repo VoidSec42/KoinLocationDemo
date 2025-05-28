@@ -1,18 +1,13 @@
 package com.example.koindemo
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.location.LocationManager
-import android.location.LocationManager.GPS_PROVIDER
-import android.location.LocationManager.NETWORK_PROVIDER
-import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.example.koindemo.api.Constant
+import com.example.koindemo.api.NetworkResponse
+import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(

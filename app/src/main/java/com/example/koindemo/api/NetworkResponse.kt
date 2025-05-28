@@ -1,4 +1,4 @@
-package com.example.koindemo
+package com.example.koindemo.api
 
 sealed class NetworkResponse<out T> {
     data class Success<out T> (val data : T): NetworkResponse<T>()

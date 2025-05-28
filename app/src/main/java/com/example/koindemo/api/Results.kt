@@ -1,4 +1,4 @@
-package com.example.koindemo
+package com.example.koindemo.api
 
 data class Results(
     val astronomical_twilight_begin: String,

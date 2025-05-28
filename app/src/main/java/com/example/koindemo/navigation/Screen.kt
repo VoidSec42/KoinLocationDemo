@@ -1,4 +1,4 @@
-package com.example.koindemo
+package com.example.koindemo.navigation
 
 sealed class Screen(val route: String) {
     object StartScreen: Screen("start_screen")

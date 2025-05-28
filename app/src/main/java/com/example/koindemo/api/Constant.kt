@@ -1,4 +1,4 @@
-package com.example.koindemo
+package com.example.koindemo.api
 
 object Constant {
     val latitude = "53.551086"

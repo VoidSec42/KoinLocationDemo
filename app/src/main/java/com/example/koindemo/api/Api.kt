@@ -1,4 +1,4 @@
-package com.example.koindemo
+package com.example.koindemo.api
 
 import retrofit2.Response
 import retrofit2.http.GET

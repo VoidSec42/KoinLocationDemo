@@ -1,14 +1,13 @@
-package com.example.koindemo
+package com.example.koindemo.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import com.example.koindemo.MainViewModel
+import com.example.koindemo.pages.StartPage
 
 
 @Composable
