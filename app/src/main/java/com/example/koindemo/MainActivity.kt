@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         // Then open SunsetPage
                         Toast.makeText(this, "Permissions are granted", Toast.LENGTH_SHORT).show()
-                        SunsetPage(viewModel, navController)
+                        StartPage(viewModel, navController)
                     } else {
                         // Request Permission if false
                         val requestCode = Random.nextInt(1000, 10000)
@@ -87,7 +87,7 @@ class MainActivity : ComponentActivity() {
                         // And open SunsetPage
                         Toast.makeText(this, "Permissions are not granted", Toast.LENGTH_SHORT)
                             .show()
-                        SunsetPage(viewModel, navController)
+                        StartPage(viewModel, navController)
                     }
                 }
             }
