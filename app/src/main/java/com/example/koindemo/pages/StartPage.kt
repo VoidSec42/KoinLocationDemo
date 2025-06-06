@@ -17,16 +17,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.koindemo.MainViewModel
-import com.example.koindemo.navigation.Screen
+import com.example.koindemo.navigation.Nav
 
 @Composable
 fun StartPage(viewModel: MainViewModel, navController: NavController) {
+    Nav()
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         // Row to open HamburgLocationPage
         Spacer(modifier = Modifier.height(64.dp))
         HeadlineAndText()
@@ -59,14 +59,14 @@ fun HeadlineAndText(
 fun Buttons() {
     val navController = rememberNavController()
     Row {
-        Button(onClick = { navController.navigate(Screen.HamburgLocationScreen.route)
+        Button(onClick = { navController.navigate(route = "Hamburg")
         }) {
             Text("Go to Hamburg Page")
         }
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(Screen.BerlinLocationScreen.route)
+        Button(onClick = { navController.navigate(route = "Berlin")
 
         }) {
             Text("Go to Berlin Page")
@@ -74,7 +74,7 @@ fun Buttons() {
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(Screen.FrankfurtLocationScreen.route)
+        Button(onClick = { navController.navigate(route = "Frankfurt")
 
         }) {
             Text("Go to Frankfurt Page")
@@ -82,7 +82,7 @@ fun Buttons() {
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(Screen.KielLocationScreen.route)
+        Button(onClick = { navController.navigate(route = "Kiel")
 
         }) {
             Text("Go to Kiel Page")

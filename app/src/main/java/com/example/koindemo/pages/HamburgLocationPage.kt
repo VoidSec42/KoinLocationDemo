@@ -29,13 +29,12 @@ fun HamburgLocationPage(viewModel: MainViewModel, navController: NavController) 
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        {
-            viewModel.getSunsetData(
-                longitude = Constant.longitudeHamburg,
-                latitude = Constant.latitudeHamburg
-            )
-        }
+        viewModel.getSunsetData(
+            longitude = Constant.longitudeHamburg,
+            latitude = Constant.latitudeHamburg
+        )
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,

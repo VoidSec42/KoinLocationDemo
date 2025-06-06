@@ -16,28 +16,31 @@ import com.example.koindemo.pages.SunsetPage
 
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Nav() {
     val navController = rememberNavController()
-    val myViewModel: MainViewModel = viewModel()
-    NavHost(navController = navController, startDestination = Screen.StartScreen.route) {
-        composable(route = Screen.StartScreen.route) {
-            StartPage(myViewModel, navController)
+    val viewModel: MainViewModel = viewModel()
+    NavHost(navController = navController, startDestination = "Start") {
+
+        composable(route = "Hamburg") {
+            HamburgLocationPage(viewModel, navController)
         }
-        composable(route = Screen.HamburgLocationScreen.route) {
-            HamburgLocationPage(myViewModel, navController)
+
+        composable(route = "Frankfurt") {
+            FrankfurtLocationPage(viewModel, navController)
         }
-        composable(route = Screen.BerlinLocationScreen.route) {
-            BerlinLocationPage(myViewModel, navController)
+
+        composable(route = "Berlin") {
+            BerlinLocationPage(viewModel, navController)
         }
-        composable(route = Screen.FrankfurtLocationScreen.route) {
-            FrankfurtLocationPage(myViewModel, navController)
+
+        composable(route = "Kiel") {
+            KielLocationPage(viewModel, navController)
         }
-        composable(route = Screen.KielLocationScreen.route) {
-            KielLocationPage(myViewModel, navController)
+
+        composable(route = "Start") {
+            StartPage(viewModel, navController)
         }
-        composable(route = Screen.SunsetScreen.route) {
-            SunsetPage(myViewModel, navController)
-        }
+
     }
 }
 

@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.rememberNavController
+import com.example.koindemo.navigation.Nav
 import com.example.koindemo.pages.StartPage
 import com.example.koindemo.ui.theme.KoinDemoTheme
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
                     val viewModel = getViewModel<MainViewModel>()
+                    Nav()
                     // Check Permissions
                     if (ActivityCompat.checkSelfPermission(
                             this,
