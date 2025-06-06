@@ -29,13 +29,12 @@ fun BerlinLocationPage(viewModel: MainViewModel, navController: NavController) {
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        {
             viewModel.getSunsetData(
                 longitude = Constant.longitudeBerlin,
                 latitude = Constant.latitudeBerlin
             )
-        }
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,

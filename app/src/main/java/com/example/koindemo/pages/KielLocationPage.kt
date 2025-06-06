@@ -29,13 +29,12 @@ fun KielLocationPage(viewModel: MainViewModel, navController: NavController) {
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        {
             viewModel.getSunsetData(
                 longitude = Constant.longitudeFrankfurt,
                 latitude = Constant.latitudeFrankfurt
             )
-        }
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
