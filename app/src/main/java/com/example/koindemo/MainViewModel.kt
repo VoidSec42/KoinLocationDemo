@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.koindemo.api.Constant
+import com.example.koindemo.api.LocationModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
@@ -16,7 +17,9 @@ class MainViewModel(
 
     private val _sunsetResult = MutableLiveData<NetworkResponse<SunsetModel>>()
     val sunsetResult: LiveData<NetworkResponse<SunsetModel>> = _sunsetResult
-    val requestPermissionCode = 10001
+
+    private val _locationResult = MutableLiveData<LocationModel?>()
+    val locationResult: LiveData<LocationModel?> = _locationResult
 
     fun getSunsetData(longitude: String, latitude: String) {
         _sunsetResult.value = NetworkResponse.Loading
@@ -37,8 +40,9 @@ class MainViewModel(
     }
 
     fun getLocation() {
+        _locationResult.value = null
         viewModelScope.launch {
-            repository.getLastLocation()
+            _locationResult.value = repository.getLastLocation()
         }
     }
 
