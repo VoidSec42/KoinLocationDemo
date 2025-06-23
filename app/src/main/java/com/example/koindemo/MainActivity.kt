@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.rememberNavController
+import com.example.koindemo.navigation.Navigation
 import com.example.koindemo.pages.StartPage
 import com.example.koindemo.ui.theme.KoinDemoTheme
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -33,7 +34,6 @@ class MainActivity : ComponentActivity() {
             KoinDemoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-                    val viewModel = getViewModel<MainViewModel>()
                     // Check Permissions
                     if (ActivityCompat.checkSelfPermission(
                             this,
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         // Then open StartPage
                         Toast.makeText(this, "Permissions are granted", Toast.LENGTH_SHORT).show()
-                        StartPage(viewModel, navController)
+                        Navigation(navController)
                     } else {
                         // Request Permission if false
                         val requestCode = Random.nextInt(1000, 10000)
@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
                         // And open StartPage
                         Toast.makeText(this, "Permissions are not granted", Toast.LENGTH_SHORT)
                             .show()
-                        StartPage(viewModel, navController)
+                        Navigation(navController)
                     }
                 }
             }

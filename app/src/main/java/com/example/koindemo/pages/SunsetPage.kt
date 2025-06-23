@@ -21,14 +21,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SunsetPage(viewModel: MainViewModel, navController: NavController) {
+fun SunsetPage() {
 
+    val viewModel: MainViewModel = koinViewModel()
     val sunsetResult = viewModel.sunsetResult.observeAsState()
     val locationResult = viewModel.getLocation()
     var inputLatitude by remember { mutableStateOf("") }

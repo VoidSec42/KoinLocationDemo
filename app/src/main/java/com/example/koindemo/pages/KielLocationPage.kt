@@ -17,25 +17,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.koindemo.api.Constant
 import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun KielLocationPage(viewModel: MainViewModel, navController: NavController) {
+fun KielLocationPage() {
 
+    val viewModel: MainViewModel = koinViewModel()
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        {
-            viewModel.getSunsetData(
-                longitude = Constant.longitudeFrankfurt,
-                latitude = Constant.latitudeFrankfurt
-            )
-        }
+        viewModel.getSunsetData(
+            longitude = Constant.longitudeKiel,
+            latitude = Constant.latitudeKiel
+        )
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -48,7 +50,7 @@ fun KielLocationPage(viewModel: MainViewModel, navController: NavController) {
                 Text(text = result.message)
             }
 
-            NetworkResponse.Loading -> {
+            is NetworkResponse.Loading -> {
                 CircularProgressIndicator()
             }
 

@@ -62,6 +62,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     // KOIN
     implementation("io.insert-koin:koin-android:4.0.2")
+    implementation("io.insert-koin:koin-androidx-compose:4.0.2")
+    implementation("io.insert-koin:koin-compose-viewmodel:4.0.2")
     // OKHTTP
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     //GSON Converter
