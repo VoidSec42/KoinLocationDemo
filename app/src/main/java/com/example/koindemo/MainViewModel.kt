@@ -11,7 +11,7 @@ import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val repository: MainRepositoryInterface, private val context: Context
+    private val repository: MainRepositoryInterface
 ) : ViewModel() {
 
     private val _sunsetResult = MutableLiveData<NetworkResponse<SunsetModel>>()
@@ -22,7 +22,7 @@ class MainViewModel(
         _sunsetResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try {
-                val response = repository.getSunsetData(Constant.longitude, Constant.latitude)
+                val response = repository.getSunsetData(longitude, latitude)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _sunsetResult.value = NetworkResponse.Success(it)

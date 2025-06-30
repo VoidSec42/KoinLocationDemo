@@ -1,6 +1,5 @@
 package com.example.koindemo.pages
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,28 +10,28 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.koindemo.api.Constant
 import com.example.koindemo.MainViewModel
+import com.example.koindemo.api.Constant
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HamburgLocationPage(viewModel: MainViewModel, navController: NavController) {
+fun HamburgLocationPage() {
 
-    val sunsetResult = viewModel.sunsetResult.observeAsState()
+    val hamburgViewModel: MainViewModel = koinViewModel()
+
+    val sunsetResult = hamburgViewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.getSunsetData(
-            longitude = Constant.longitudeHamburg,
-            latitude = Constant.latitudeHamburg
-        )
+        hamburgViewModel.getSunsetData(Constant.longitudeHamburg, Constant.latitudeHamburg)
     }
 
     Column(
@@ -47,7 +46,7 @@ fun HamburgLocationPage(viewModel: MainViewModel, navController: NavController) 
                 Text(text = result.message)
             }
 
-            NetworkResponse.Loading -> {
+            is NetworkResponse.Loading -> {
                 CircularProgressIndicator()
             }
 

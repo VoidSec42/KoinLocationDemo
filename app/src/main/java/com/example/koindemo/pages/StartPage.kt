@@ -14,14 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.koindemo.MainViewModel
-import com.example.koindemo.navigation.Nav
+import com.example.koindemo.navigation.Screen
 
 @Composable
-fun StartPage(viewModel: MainViewModel, navController: NavController) {
-    Nav()
+fun StartPage(
+    onNavigateToHamburg: () -> Unit,
+    onNavigateToBerlin: () -> Unit,
+    onNavigateToFrankfurt: () -> Unit,
+    onNavigateToKiel: () -> Unit,
+    onNavigateToSunset: () -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -29,12 +32,24 @@ fun StartPage(viewModel: MainViewModel, navController: NavController) {
     ) {
         // Row to open HamburgLocationPage
         Spacer(modifier = Modifier.height(64.dp))
-        HeadlineAndText()
+        HeadlineAndText(
+            onNavigateToHamburg,
+            onNavigateToBerlin,
+            onNavigateToFrankfurt,
+            onNavigateToKiel,
+            onNavigateToSunset
+        )
+//        Navigation(navController)
     }
 }
 
 @Composable
 fun HeadlineAndText(
+    onNavigateToHamburg: () -> Unit,
+    onNavigateToBerlin: () -> Unit,
+    onNavigateToFrankfurt: () -> Unit,
+    onNavigateToKiel: () -> Unit,
+    onNavigateToSunset: () -> Unit
 ) {
     Row {
         Text(
@@ -52,40 +67,52 @@ fun HeadlineAndText(
         )
     }
     Spacer(modifier = Modifier.height(32.dp))
-    Buttons()
+    Buttons(
+        onNavigateToHamburg,
+        onNavigateToBerlin,
+        onNavigateToFrankfurt,
+        onNavigateToKiel,
+        onNavigateToSunset
+    )
 }
 
 @Composable
-fun Buttons() {
-    val navController = rememberNavController()
+fun Buttons(
+    onNavigateToHamburg: () -> Unit,
+    onNavigateToBerlin: () -> Unit,
+    onNavigateToFrankfurt: () -> Unit,
+    onNavigateToKiel: () -> Unit,
+    onNavigateToSunset: () -> Unit
+) {
     Row {
-        Button(onClick = { navController.navigate(route = "Hamburg")
-        }) {
+        Button(onClick = onNavigateToHamburg) {
             Text("Go to Hamburg Page")
         }
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(route = "Berlin")
 
-        }) {
+        Button(onClick = onNavigateToBerlin) {
             Text("Go to Berlin Page")
         }
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(route = "Frankfurt")
 
-        }) {
+        Button(onClick = onNavigateToFrankfurt) {
             Text("Go to Frankfurt Page")
         }
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
-        Button(onClick = { navController.navigate(route = "Kiel")
-
-        }) {
+        Button(onClick = onNavigateToKiel) {
             Text("Go to Kiel Page")
+        }
+    }
+    Spacer(modifier = Modifier.height(32.dp))
+    Row {
+        Button(onClick = onNavigateToSunset) {
+            Text("Show Sunset at my Location")
         }
     }
 }

@@ -1,12 +1,9 @@
 package com.example.koindemo.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.koindemo.MainViewModel
 import com.example.koindemo.pages.BerlinLocationPage
 import com.example.koindemo.pages.FrankfurtLocationPage
 import com.example.koindemo.pages.HamburgLocationPage
@@ -16,31 +13,44 @@ import com.example.koindemo.pages.SunsetPage
 
 
 @Composable
-fun Nav() {
-    val navController = rememberNavController()
-    val viewModel: MainViewModel = viewModel()
-    NavHost(navController = navController, startDestination = "Start") {
-
-        composable(route = "Hamburg") {
-            HamburgLocationPage(viewModel, navController)
+fun Navigation(navController: NavHostController) {
+//    val navController = rememberNavController()
+//    val myViewModel: MainViewModel = viewModel()
+    NavHost(navController = navController, startDestination = Screen.StartScreen.route) {
+        composable(route = Screen.StartScreen.route) {
+            StartPage(
+                onNavigateToHamburg = {
+                    navController.navigate(Screen.HamburgLocationScreen.route)
+                },
+                onNavigateToBerlin = {
+                    navController.navigate(Screen.BerlinLocationScreen.route)
+                },
+                onNavigateToFrankfurt = {
+                    navController.navigate(Screen.FrankfurtLocationScreen.route)
+                },
+                onNavigateToKiel = {
+                    navController.navigate(Screen.KielLocationScreen.route)
+                },
+                onNavigateToSunset = {
+                    navController.navigate(Screen.SunsetScreen.route)
+                }
+            )
         }
-
-        composable(route = "Frankfurt") {
-            FrankfurtLocationPage(viewModel, navController)
+        composable(route = Screen.HamburgLocationScreen.route) {
+            HamburgLocationPage()
         }
-
-        composable(route = "Berlin") {
-            BerlinLocationPage(viewModel, navController)
+        composable(route = Screen.BerlinLocationScreen.route) {
+            BerlinLocationPage()
         }
-
-        composable(route = "Kiel") {
-            KielLocationPage(viewModel, navController)
+        composable(route = Screen.FrankfurtLocationScreen.route) {
+            FrankfurtLocationPage()
         }
-
-        composable(route = "Start") {
-            StartPage(viewModel, navController)
+        composable(route = Screen.KielLocationScreen.route) {
+            KielLocationPage()
         }
-
+        composable(route = Screen.SunsetScreen.route) {
+            SunsetPage()
+        }
     }
 }
 
