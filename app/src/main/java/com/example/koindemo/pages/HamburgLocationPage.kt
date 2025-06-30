@@ -33,6 +33,7 @@ fun HamburgLocationPage() {
     LaunchedEffect(Unit) {
         hamburgViewModel.getSunsetData(Constant.longitudeHamburg, Constant.latitudeHamburg)
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,

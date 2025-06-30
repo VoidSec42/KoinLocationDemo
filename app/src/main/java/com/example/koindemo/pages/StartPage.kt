@@ -30,9 +30,6 @@ fun StartPage(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-//        val navController = rememberNavController()
-
         // Row to open HamburgLocationPage
         Spacer(modifier = Modifier.height(64.dp))
         HeadlineAndText(
@@ -94,12 +91,14 @@ fun Buttons(
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
+
         Button(onClick = onNavigateToBerlin) {
             Text("Go to Berlin Page")
         }
     }
     Spacer(modifier = Modifier.height(32.dp))
     Row {
+
         Button(onClick = onNavigateToFrankfurt) {
             Text("Go to Frankfurt Page")
         }
