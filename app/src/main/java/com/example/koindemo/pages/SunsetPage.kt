@@ -33,7 +33,7 @@ fun SunsetPage() {
 
     val viewModel: MainViewModel = koinViewModel()
     val sunsetResult = viewModel.sunsetResult.observeAsState()
-    val locationResult = viewModel.getLocation()
+    val locationResult = viewModel.locationResult.observeAsState()
     var inputLatitude by remember { mutableStateOf("") }
     var inputLongitude by remember { mutableStateOf("") }
 
@@ -62,21 +62,39 @@ fun SunsetPage() {
         Row {
             Text(text = "Location:")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = locationResult.toString())
+            Text(text = locationResult.value?.latitude + " " + locationResult.value?.longitude)
         }
         Spacer(modifier = Modifier.height(42.dp))
 
-        // Row for showing the input text field for sunset API parameters
-        Row {
-            OutlinedTextField(
-                value = inputLatitude,
-                onValueChange = { inputLatitude = it })
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row {
-            OutlinedTextField(
-                value = inputLongitude,
-                onValueChange = { inputLongitude = it })
+        // Handling the network answer and data for SunsetAPI
+        locationResult.value.let {
+            if (it != null) {
+                // Row for showing the input text field for sunset API parameters
+                Row {
+                    OutlinedTextField(
+                        value = locationResult.value!!.latitude,
+                        onValueChange = { inputLatitude = it })
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row {
+                    OutlinedTextField(
+                        value = locationResult.value!!.longitude,
+                        onValueChange = { inputLongitude = it })
+                }
+            } else {
+                // Row for showing the input text field for sunset API parameters
+                Row {
+                    OutlinedTextField(
+                        value = inputLatitude,
+                        onValueChange = { inputLatitude = it })
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row {
+                    OutlinedTextField(
+                        value = inputLongitude,
+                        onValueChange = { inputLongitude = it })
+                }
+            }
         }
 
         // Row for fetching Sunset API with added parameters
@@ -111,17 +129,6 @@ fun SunsetPage() {
             }
 
             null -> {
-            }
-        }
-
-        // Row to open HamburgLocationPage
-        Spacer(modifier = Modifier.height(32.dp))
-        Row {
-            Button(onClick = { /*navController.navigate.*/
-
-            }) {
-                Text("Go to Page")
-
             }
         }
     }

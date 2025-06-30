@@ -14,8 +14,6 @@ import com.example.koindemo.pages.SunsetPage
 
 @Composable
 fun Navigation(navController: NavHostController) {
-//    val navController = rememberNavController()
-//    val myViewModel: MainViewModel = viewModel()
     NavHost(navController = navController, startDestination = Screen.StartScreen.route) {
         composable(route = Screen.StartScreen.route) {
             StartPage(

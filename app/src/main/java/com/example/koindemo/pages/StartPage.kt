@@ -39,7 +39,6 @@ fun StartPage(
             onNavigateToKiel,
             onNavigateToSunset
         )
-//        Navigation(navController)
     }
 }
 
