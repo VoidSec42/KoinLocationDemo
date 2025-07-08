@@ -1,14 +1,15 @@
-package com.example.koindemo
+package com.example.koindemo.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.koindemo.MainRepositoryInterface
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
 
-class FrankfurtViewModel(
+class HamburgViewModel(
     private val repository: MainRepositoryInterface
 ) : ViewModel() {
 
@@ -32,5 +33,4 @@ class FrankfurtViewModel(
             }
         }
     }
-
 }

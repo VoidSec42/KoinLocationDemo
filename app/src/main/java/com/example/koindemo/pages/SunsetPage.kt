@@ -23,7 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.koindemo.MainViewModel
+import com.example.koindemo.viewmodels.MainViewModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import org.koin.androidx.compose.koinViewModel

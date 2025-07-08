@@ -1,31 +1,26 @@
-package com.example.koindemo
+package com.example.koindemo.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.koindemo.api.Constant
-import com.example.koindemo.api.LocationModel
+import com.example.koindemo.MainRepositoryInterface
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class KielViewModel(
     private val repository: MainRepositoryInterface
 ) : ViewModel() {
 
     private val _sunsetResult = MutableLiveData<NetworkResponse<SunsetModel>>()
     val sunsetResult: LiveData<NetworkResponse<SunsetModel>> = _sunsetResult
 
-    private val _locationResult = MutableLiveData<LocationModel?>()
-    val locationResult: LiveData<LocationModel?> = _locationResult
-
     fun getSunsetData(longitude: String, latitude: String) {
         _sunsetResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try {
-                val response = repository.getSunsetData(longitude, latitude)
+                val response = repository.getSunsetData(longitude = longitude, latitude = latitude)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _sunsetResult.value = NetworkResponse.Success(it)
@@ -36,13 +31,6 @@ class MainViewModel(
             } catch (e: Exception) {
                 _sunsetResult.value = NetworkResponse.Error("Failed to load data.")
             }
-        }
-    }
-
-    fun getLocation() {
-        _locationResult.value = null
-        viewModelScope.launch {
-            _locationResult.value = repository.getLastLocation()
         }
     }
 

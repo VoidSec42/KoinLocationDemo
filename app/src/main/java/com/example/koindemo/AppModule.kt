@@ -1,6 +1,11 @@
 package com.example.koindemo
 
 import com.example.koindemo.api.Api
+import com.example.koindemo.viewmodels.BerlinViewModel
+import com.example.koindemo.viewmodels.FrankfurtViewModel
+import com.example.koindemo.viewmodels.HamburgViewModel
+import com.example.koindemo.viewmodels.KielViewModel
+import com.example.koindemo.viewmodels.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -19,7 +24,6 @@ val appModule = module {
     single<MainRepositoryInterface> {
         MainRepository(get(), androidContext())
     }
-
 }
 
 val viewModelModule = module {
