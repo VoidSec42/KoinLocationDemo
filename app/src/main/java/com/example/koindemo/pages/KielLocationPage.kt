@@ -17,11 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.koindemo.KielViewModel
 import com.example.koindemo.api.Constant
-import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import org.koin.androidx.compose.koinViewModel

@@ -18,7 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.koindemo.BerlinViewModel
-import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.Constant
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
