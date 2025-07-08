@@ -1,12 +1,9 @@
 package com.example.koindemo
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.koindemo.api.Constant
-import com.example.koindemo.api.LocationModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
