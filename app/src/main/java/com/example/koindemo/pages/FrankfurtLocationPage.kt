@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.koindemo.FrankfurtViewModel
 import com.example.koindemo.api.Constant
 import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.NetworkResponse
@@ -28,7 +29,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun FrankfurtLocationPage() {
 
-    val viewModel: MainViewModel = koinViewModel()
+    val viewModel: FrankfurtViewModel = koinViewModel()
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {

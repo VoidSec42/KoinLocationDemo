@@ -26,4 +26,19 @@ val viewModelModule = module {
     viewModel {
         MainViewModel(get())
     }
+    viewModel {
+        HamburgViewModel(get())
+    }
+
+    viewModel {
+        BerlinViewModel(get())
+    }
+
+    viewModel {
+        FrankfurtViewModel(get())
+    }
+
+    viewModel {
+        KielViewModel(get())
+    }
 }

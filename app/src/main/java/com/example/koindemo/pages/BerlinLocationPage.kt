@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.koindemo.BerlinViewModel
 import com.example.koindemo.MainViewModel
 import com.example.koindemo.api.Constant
 import com.example.koindemo.api.NetworkResponse
@@ -26,7 +27,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun BerlinLocationPage() {
 
-    val viewModel: MainViewModel = koinViewModel()
+    val viewModel: BerlinViewModel = koinViewModel()
     val sunsetResult = viewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
