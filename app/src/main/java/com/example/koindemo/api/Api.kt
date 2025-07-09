@@ -9,7 +9,8 @@ interface Api {
     @GET("/json")
     suspend fun callSunsetApi(
         @Query("lat") latitude : String,
-        @Query("lng") longitude : String
+        @Query("lng") longitude : String,
+        @Query("formatted") formatted : Int = 0
     ): Response<SunsetModel>
 
 }
