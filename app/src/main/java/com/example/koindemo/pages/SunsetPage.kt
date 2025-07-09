@@ -101,30 +101,34 @@ fun SunsetPage(onNavigateToStart: () -> Unit) {
             // Handling the network answer and data for SunsetAPI
             locationResult.value.let {
                 if (it != null) {
+                    inputLatitude = locationResult.value!!.latitude
+                    inputLongitude = locationResult.value!!.longitude
                     // Row for showing the input text field for sunset API parameters
                     Row {
                         OutlinedTextField(
                             value = locationResult.value!!.latitude,
-                            onValueChange = { inputLatitude = it })
+                            onValueChange = { /* Do nothing if read-only */ }
+                        )
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Row {
                         OutlinedTextField(
                             value = locationResult.value!!.longitude,
-                            onValueChange = { inputLongitude = it })
+                            onValueChange = { /* Do nothing if read-only */ }
+                        )
                     }
                 } else {
                     // Row for showing the input text field for sunset API parameters
                     Row {
                         OutlinedTextField(
                             value = inputLatitude,
-                            onValueChange = { inputLatitude = it })
+                            onValueChange = {  })
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Row {
                         OutlinedTextField(
                             value = inputLongitude,
-                            onValueChange = { inputLongitude = it })
+                            onValueChange = {  })
                     }
                 }
             }

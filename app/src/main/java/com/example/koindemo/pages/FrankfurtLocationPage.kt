@@ -44,7 +44,6 @@ fun FrankfurtLocationPage(onNavigateToStart: () -> Unit) {
         viewModel.getSunsetData(Constant.longitudeFrankfurt, Constant.latitudeFrankfurt)
     }
 
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -68,7 +67,6 @@ fun FrankfurtLocationPage(onNavigateToStart: () -> Unit) {
             )
         }
     ) { values ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
