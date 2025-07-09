@@ -24,7 +24,7 @@ class MainViewModel(
         _sunsetResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try {
-                val response = repository.getSunsetData(longitude, latitude)
+                val response = repository.getSunsetData(longitude = longitude, latitude = latitude)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _sunsetResult.value = NetworkResponse.Success(it)
