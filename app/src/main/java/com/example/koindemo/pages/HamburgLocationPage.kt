@@ -7,8 +7,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
@@ -23,8 +31,12 @@ import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
 import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HamburgLocationPage() {
+fun HamburgLocationPage(
+    onNavigateToStart: () -> Unit
+    )
+    {
 
     val hamburgViewModel: MainViewModel = koinViewModel()
 
@@ -34,31 +46,51 @@ fun HamburgLocationPage() {
         hamburgViewModel.getSunsetData(Constant.longitudeHamburg, Constant.latitudeHamburg)
     }
 
-    Column(
+    Scaffold(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(64.dp))
-        HeadlineAndTextHamburg()
-        when (val result = sunsetResult.value) {
-            is NetworkResponse.Error -> {
-                Text(text = result.message)
-            }
+        topBar = {
+            TopAppBar(title = {
+                Text(text = "Hamburg Location Page")
+            },
+             navigationIcon = {
+                 IconButton(onClick = onNavigateToStart ) {
+                     Icon(
+                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                         contentDescription = "Back"
+                     )
+                 }
+             }   )
+        }
+        ) {
+        values ->
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(64.dp))
+            HeadlineAndTextHamburg()
+            when (val result = sunsetResult.value) {
+                is NetworkResponse.Error -> {
+                    Text(text = result.message)
+                }
 
-            is NetworkResponse.Loading -> {
-                CircularProgressIndicator()
-            }
+                is NetworkResponse.Loading -> {
+                    CircularProgressIndicator()
+                }
 
-            is NetworkResponse.Success -> {
-                HamburgDetails(data = result.data)
-            }
+                is NetworkResponse.Success -> {
+                    HamburgDetails(data = result.data)
+                }
 
-            null -> {
+                null -> {
+                }
             }
         }
     }
-}
+    }
+
+
 
 
 @Composable

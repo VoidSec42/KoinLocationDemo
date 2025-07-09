@@ -35,19 +35,29 @@ fun Navigation(navController: NavHostController) {
             )
         }
         composable(route = Screen.HamburgLocationScreen.route) {
-            HamburgLocationPage()
+            HamburgLocationPage(onNavigateToStart = {
+                navController.navigate(Screen.StartScreen.route)
+            })
         }
         composable(route = Screen.BerlinLocationScreen.route) {
-            BerlinLocationPage()
+            BerlinLocationPage(onNavigateToStart = {
+                navController.navigate(Screen.StartScreen.route)
+            })
         }
         composable(route = Screen.FrankfurtLocationScreen.route) {
-            FrankfurtLocationPage()
+            FrankfurtLocationPage(onNavigateToStart = {
+                navController.navigate(Screen.StartScreen.route)
+            })
         }
         composable(route = Screen.KielLocationScreen.route) {
-            KielLocationPage()
+            KielLocationPage(onNavigateToStart = {
+                navController.navigate(Screen.StartScreen.route)
+            })
         }
         composable(route = Screen.SunsetScreen.route) {
-            SunsetPage()
+            SunsetPage(onNavigateToStart = {
+                navController.navigate(Screen.StartScreen.route)
+            })
         }
     }
 }
