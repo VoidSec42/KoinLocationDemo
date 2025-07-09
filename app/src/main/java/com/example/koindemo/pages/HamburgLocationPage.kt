@@ -1,11 +1,13 @@
 package com.example.koindemo.pages
 
+import android.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -17,11 +19,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,8 +40,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HamburgLocationPage(
     onNavigateToStart: () -> Unit
-    )
-    {
+) {
 
     val hamburgViewModel: MainViewModel = koinViewModel()
 
@@ -49,24 +53,32 @@ fun HamburgLocationPage(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = {
-                Text(text = "Hamburg Location Page")
-            },
-             navigationIcon = {
-                 IconButton(onClick = onNavigateToStart ) {
-                     Icon(
-                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                         contentDescription = "Back"
-                     )
-                 }
-             }   )
+            TopAppBar(
+                title = {
+                    Text(text = "Hamburg Location Page")
+                },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateToStart) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Blue,
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White
+                )
+            )
         }
-        ) {
-        values ->
+    ) { values ->
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(42.dp),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.height(64.dp))
             HeadlineAndTextHamburg()
@@ -88,9 +100,7 @@ fun HamburgLocationPage(
             }
         }
     }
-    }
-
-
+}
 
 
 @Composable
