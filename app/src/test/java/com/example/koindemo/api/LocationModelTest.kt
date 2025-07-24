@@ -24,4 +24,13 @@ class LocationModelTest {
         assertThat(result).isFalse()
     }
 
+    @Test
+    fun validLocationValueIsInvalid_returnsFalse() {
+        val result = validateLocationModel(
+            latitude = "999.9999",
+            longitude = "1000.121232"
+        )
+        assertThat(result).isFalse()
+    }
+
 }

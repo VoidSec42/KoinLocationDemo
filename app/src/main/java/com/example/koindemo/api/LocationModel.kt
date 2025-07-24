@@ -9,6 +9,8 @@ data class LocationModel(
  * Check if the location is valid ...
  * ...the latitude is not empty
  * ...the longitude is not empty
+ * ...the latitude is between -90 and 90
+ * ...the longitude is between -180 and 180
  */
 
 fun validateLocationModel(
@@ -20,5 +22,8 @@ fun validateLocationModel(
         return false
     }
 
+    if ((latitude.toDouble() !in -90.0..90.0) || (longitude.toDouble() !in -180.0..180.0)) {
+        return false
+    }
     return true
 }
