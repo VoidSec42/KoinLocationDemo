@@ -10,8 +10,15 @@ import com.example.koindemo.api.Constant.longitude
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.Results
 import com.example.koindemo.api.SunsetModel
+import com.example.koindemo.getOrAwaitValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -49,16 +56,25 @@ class MainViewModelTest {
     fun setup() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         viewModel = MainViewModel(MainRepository(TestAPI(), context = appContext))
+        Dispatchers.setMain(StandardTestDispatcher())
     }
 
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testStatus_Loading() {
+    fun testStatus_Loading() = runTest {
         val dispatcher = StandardTestDispatcher()
-        val scope = TestScope(dispatcher)
+        Dispatchers.setMain(dispatcher)
         val value = viewModel.sunsetResult.value
         assertNull(value)
         viewModel.getSunsetData(longitude, latitude)
-        val newValue = viewModel.sunsetResult.value
+        dispatcher.scheduler.advanceUntilIdle() // Waits for coroutine completion
+        val newValue = viewModel.sunsetResult.getOrAwaitValue()
         assertEquals(NetworkResponse.Success(sunsetModel), newValue)
     }
 }
