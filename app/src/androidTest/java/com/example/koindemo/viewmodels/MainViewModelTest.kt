@@ -7,6 +7,8 @@ import com.example.koindemo.MainRepository
 import com.example.koindemo.api.Api
 import com.example.koindemo.api.Constant.latitude
 import com.example.koindemo.api.Constant.longitude
+import com.example.koindemo.api.Constant.testErrorLatitude
+import com.example.koindemo.api.Constant.testErrorLongitude
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.Results
 import com.example.koindemo.api.SunsetModel
@@ -77,6 +79,21 @@ class MainViewModelTest {
         val newValue = viewModel.sunsetResult.getOrAwaitValue()
         assertEquals(NetworkResponse.Success(sunsetModel), newValue)
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testStatus_Error() = runTest {
+        val dispatcher = StandardTestDispatcher()
+        Dispatchers.setMain(dispatcher)
+        val value = viewModel.sunsetResult.value
+        assertNull(value)
+        viewModel.getSunsetData(testErrorLongitude, testErrorLatitude)
+        dispatcher.scheduler.advanceUntilIdle() // Waits for coroutine completion
+        val newValue = viewModel.sunsetResult.getOrAwaitValue()
+        assertTrue(newValue is NetworkResponse.Error)
+        assertEquals("Failed to load data.", (newValue as NetworkResponse.Error).message)
+    }
+
 }
 
 class TestAPI : Api {

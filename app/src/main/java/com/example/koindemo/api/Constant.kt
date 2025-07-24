@@ -11,4 +11,7 @@ object Constant {
     val longitudeFrankfurt = "8.6821"
     val latitudeKiel = "54.3233"
     val longitudeKiel = "10.1228"
+    val testErrorLongitude = "1000"
+    val testErrorLatitude = "1000"
+
 }
