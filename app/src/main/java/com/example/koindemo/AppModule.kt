@@ -21,8 +21,12 @@ val appModule = module {
             .create(Api::class.java)
     }
 
+    // Provide ContextProvider wrapping androidContext()
+    single { ContextProvider(androidContext()) }
+
+    // Provide MainRepository using Api and ContextProvider
     single<MainRepositoryInterface> {
-        MainRepository(get(), androidContext())
+        MainRepository(get(), get()) // get<Api>(), get<ContextProvider>()
     }
 }
 
