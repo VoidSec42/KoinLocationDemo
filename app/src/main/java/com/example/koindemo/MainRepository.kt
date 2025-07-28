@@ -3,6 +3,7 @@ package com.example.koindemo
 import android.Manifest
 import android.location.Location
 import android.util.Log
+import android.util.Log.e
 import androidx.annotation.RequiresPermission
 import com.example.koindemo.api.Api
 import com.example.koindemo.api.LocationModel
@@ -14,10 +15,8 @@ import retrofit2.Response
 
 class MainRepository(
     private val api: Api,
-    private val contextProvider: ContextProvider
+    private val geoLocation: GeoLocationInterface,
 ) : MainRepositoryInterface {
-
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override suspend fun getSunsetData(longitude: String, latitude: String): Response<SunsetModel> {
         return api.callSunsetApi(longitude, latitude)
@@ -25,25 +24,7 @@ class MainRepository(
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override suspend fun getLastLocation(): LocationModel? {
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(contextProvider.context)
-
-        return try {
-            val location: Location? = fusedLocationProviderClient.lastLocation.await()
-
-            if (location != null) {
-                Log.i("LocationRepository", "Location is ${location.latitude} ${location.longitude}")
-                LocationModel(
-                    latitude = location.latitude.toString(),
-                    longitude = location.longitude.toString()
-                )
-            } else {
-                Log.e("LocationRepository", "Location is null")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("LocationRepository", "Error getting last location", e)
-            null
-        }
+        val locationModel: LocationModel? = geoLocation.getLocation()
+        return locationModel
     }
 }

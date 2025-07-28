@@ -11,8 +11,8 @@ import com.example.koindemo.api.SunsetModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val repository: MainRepositoryInterface
-) : ViewModel() {
+    private val repository: MainRepositoryInterface)
+    : ViewModel() {
 
     private val _sunsetResult = MutableLiveData<NetworkResponse<SunsetModel>>()
     val sunsetResult: LiveData<NetworkResponse<SunsetModel>> = _sunsetResult

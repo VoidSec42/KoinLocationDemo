@@ -24,9 +24,12 @@ val appModule = module {
     // Provide ContextProvider wrapping androidContext()
     single { ContextProvider(androidContext()) }
 
+    // Provide Geolocation
+    single { GeoLocation(get()) }
+
     // Provide MainRepository using Api and ContextProvider
     single<MainRepositoryInterface> {
-        MainRepository(get(), get()) // get<Api>(), get<ContextProvider>()
+        MainRepository(get(), get())
     }
 }
 
