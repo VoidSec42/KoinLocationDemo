@@ -27,6 +27,10 @@ val appModule = module {
     // Provide Geolocation
     single { GeoLocation(get()) }
 
+    single<GeoLocationInterface> {
+        GeoLocation(get())
+    }
+
     // Provide MainRepository using Api and ContextProvider
     single<MainRepositoryInterface> {
         MainRepository(get(), get())
