@@ -27,21 +27,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.koindemo.viewmodels.BerlinViewModel
 import com.example.koindemo.api.Constant
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import com.example.koindemo.viewmodels.DisplayableSunTimes
+import com.example.koindemo.viewmodels.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BerlinLocationPage(onNavigateToStart: () -> Unit) {
 
-    val viewModel: BerlinViewModel = koinViewModel()
-    val sunsetResult = viewModel.sunsetResult.observeAsState()
+    val berlinViewModel: MainViewModel = koinViewModel()
+
+    val sunsetResult = berlinViewModel.sunsetResult.observeAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.getSunsetData(Constant.longitudeBerlin, Constant.latitudeBerlin)
+        berlinViewModel.getSunsetData(Constant.longitudeBerlin, Constant.latitudeBerlin)
     }
 
     Scaffold(
@@ -119,17 +123,17 @@ fun HeadlineAndTextBerlin() {
 
 
 @Composable
-fun BerlinDetails(data: SunsetModel) {
+fun BerlinDetails(data: DisplayableSunTimes) {
     Spacer(modifier = Modifier.height(32.dp))
     Row {
         Text(text = "Sunrise in Berlin is at:")
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = data.results.sunrise)
+        Text(text = data.sunrise?.deviceLocalFormatted ?: "N/A")
     }
     Row {
         Text(text = "Sunset in Berlin is at:")
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = data.results.sunset)
+        Text(text = data.sunset?.deviceLocalFormatted ?: "N/A")
     }
 }
 

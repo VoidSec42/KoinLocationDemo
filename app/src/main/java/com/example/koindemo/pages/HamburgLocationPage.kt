@@ -31,6 +31,7 @@ import com.example.koindemo.viewmodels.MainViewModel
 import com.example.koindemo.api.Constant
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import com.example.koindemo.viewmodels.DisplayableSunTimes
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -121,17 +122,17 @@ fun HeadlineAndTextHamburg() {
 
 
 @Composable
-fun HamburgDetails(data: SunsetModel) {
+fun HamburgDetails(data: DisplayableSunTimes) {
     Spacer(modifier = Modifier.height(32.dp))
     Row {
         Text(text = "Sunrise in Hamburg is at:")
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = data.results.sunrise)
+        Text(text = data.sunrise?.deviceLocalFormatted ?: "N/A")
     }
     Row {
         Text(text = "Sunset in Hamburg is at:")
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = data.results.sunset)
+        Text(text = data.sunset?.deviceLocalFormatted ?: "N/A")
     }
 }
 

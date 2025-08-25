@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.koindemo.viewmodels.MainViewModel
 import com.example.koindemo.api.NetworkResponse
 import com.example.koindemo.api.SunsetModel
+import com.example.koindemo.viewmodels.DisplayableSunTimes
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -172,22 +173,21 @@ fun SunsetPage(onNavigateToStart: () -> Unit) {
 }
 
 @Composable
-fun SunsetDetails(data: SunsetModel) {
+fun SunsetDetails(data: DisplayableSunTimes) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
+    ) {
         Row {
-            Text(text = "Sunrise is at:")
+            Text(text = "Sunrise (Device Local):")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = data.results.sunrise)
+            Text(text = data.sunrise?.deviceLocalFormatted ?: "N/A")
         }
         Row {
-            Text(text = "Sunset is at:")
+            Text(text = "Sunset (Device Local):")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = data.results.sunset)
+            Text(text = data.sunset?.deviceLocalFormatted ?: "N/A")
         }
     }
 }
